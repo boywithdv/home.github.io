@@ -100,16 +100,53 @@ npx http-server
 
 ## GitHub Pagesでの公開方法
 
-1. GitHubで`[username].github.io`という名前の新しいリポジトリを作成
+### 1. GitHubリポジトリの作成
+1. GitHubにログイン
+2. 右上の「+」ボタン → 「New repository」をクリック
+3. Repository nameを`あなたのGitHubユーザー名.github.io`として作成
+   - 例：GitHubのユーザー名が「john-doe」の場合 → `john-doe.github.io`
+4. 「Public」を選択
+5. 「Create repository」をクリック
 
-2. ローカルリポジトリをGitHubにプッシュ
+### 2. ローカルリポジトリの初期化と接続
 ```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
+# 現在のディレクトリでGitを初期化
+git init
+
+# リモートリポジトリを追加
+git remote add origin https://github.com/あなたのユーザー名/あなたのユーザー名.github.io.git
+
+# mainブランチを作成
+git branch -M main
 ```
 
-3. 数分後に`https://[username].github.io`でサイトが公開されます
+### 3. ファイルをGitHubにプッシュ
+```bash
+# 変更をステージング
+git add .
+
+# コミット
+git commit -m "Initial commit"
+
+# GitHubにプッシュ
+git push -u origin main
+```
+
+### 4. デプロイの確認
+1. GitHubのリポジトリページに移動
+2. 「Settings」タブをクリック
+3. 左サイドバーの「Pages」をクリック
+4. 「GitHub Pages」セクションで、サイトが公開されていることを確認
+   - `https://あなたのユーザー名.github.io` でアクセス可能
+   - デプロイには数分かかる場合があります
+
+### 5. 更新方法
+サイトを更新する場合は、以下のコマンドを実行：
+```bash
+git add .
+git commit -m "更新内容の説明"
+git push origin main
+```
 
 ## コンタクトフォームの設定
 
