@@ -8,12 +8,30 @@
     --dark-blue: #0a192f;
     --dark-blue-secondary: #112240;
     --dark-blue-lighter: #233554;
+    --dark-black: #000000;
+    --dark-gray: #0d1421;
     --accent-blue: #64ffda;
     --accent-blue-dark: #2188ff;
     --text-light: #ffffff;
     --text-light-blue: #8892b0;
     --glow-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
     --glow-shadow-intense: 0 0 50px rgba(100, 255, 218, 0.5);
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+    --border-radius-lg: 20px;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+    --button-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --button-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --focus-ring: 0 0 0 3px rgba(100, 255, 218, 0.3);
+    --focus-shadow: var(--card-shadow-hover), var(--glow-shadow);
+    --card-transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --layer-transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --gradient-1: rgba(100, 255, 218, 0.15);
+    --gradient-2: rgba(33, 136, 255, 0.12);
+    --gradient-3: rgba(147, 197, 253, 0.1);
+    --gradient-blur: 120px;
+    --animation-timing: 2s;
 }
 
 * {
@@ -30,7 +48,31 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--dark-blue);
+    background: linear-gradient(135deg,
+            var(--dark-black) 0%,
+            var(--dark-gray) 25%,
+            var(--dark-blue) 50%,
+            var(--dark-blue-secondary) 75%,
+            var(--dark-blue) 100%);
+    background-attachment: fixed;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Additional background pattern overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(100, 255, 218, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(33, 136, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(147, 197, 253, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* Header Styles */
@@ -82,8 +124,16 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--dark-blue);
+    background: transparent;
     color: var(--text-light);
+    position: relative;
+    /* 背景画像を使用する場合のコメントアウト例 */
+    /* 
+    background-image: url('images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    */
 }
 
 .hero-content {
@@ -117,11 +167,15 @@ body {
 
 /* Section Styles */
 section {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(10, 25, 47, 0.2);
+    backdrop-filter: blur(5px);
     padding: 5rem 2rem;
 }
 
 section:nth-child(even) {
-    background-color: var(--section-bg);
+    background-color: rgba(17, 34, 64, 0.2);
 }
 
 .about,
@@ -138,11 +192,35 @@ h2 {
 }
 
 /* About Section */
+.about {
+    background-color: transparent !important;
+    color: var(--text-light);
+}
+
+.about h2 {
+    color: var(--accent-blue);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: normal;
+    -webkit-text-stroke: none;
+}
+
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     margin-top: 2rem;
+}
+
+.about-text {
+    color: var(--text-light-blue);
+}
+
+.about-text p {
+    color: var(--text-light-blue);
+    margin-bottom: 1rem;
 }
 
 .skill-tags {
@@ -167,41 +245,102 @@ h2 {
 }
 
 /* Projects Section */
+.projects {
+    background-color: rgba(10, 25, 47, 0.3);
+    color: var(--text-light);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    margin: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    perspective: 1200px;
+}
+
+/* プロジェクトセクションのコンテナスタイル */
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--dark-blue-secondary) 0%, var(--dark-blue) 100%);
+    opacity: 0.3;
+    z-index: 1;
+    border-radius: var(--border-radius-lg);
+}
+
+.projects .project-grid,
+.projects h2 {
+    position: relative;
+    z-index: 2;
 }
 
 .project-card {
     background-color: var(--dark-blue-secondary);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--dark-blue-lighter);
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.project-card:hover,
-.project-card:focus-within {
-    transform: translateY(-10px);
-    box-shadow: var(--glow-shadow);
+.project-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+    margin: 0.75rem;
+    margin-bottom: 0;
+    border-radius: var(--border-radius-lg);
+    width: calc(100% - 1.5rem);
 }
 
-.project-card:focus-within {
-    outline: none;
-    box-shadow: var(--glow-shadow-intense);
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: var(--border-radius-lg);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: 1rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .project-card h3 {
     color: var(--text-light);
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    transition: transform var(--layer-transition), color var(--layer-transition);
 }
 
 .project-card p {
     color: var(--text-light-blue);
+    transition: transform var(--layer-transition), opacity var(--layer-transition);
+    margin-bottom: 0;
+    flex: 1;
 }
 
 .project-card .project-link {
@@ -210,12 +349,46 @@ h2 {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 1rem;
     font-weight: 500;
+    transition: transform var(--layer-transition), opacity var(--layer-transition);
+    margin-top: auto;
 }
 
-.project-card .project-link:hover {
-    text-decoration: underline;
+/* Image placeholder for missing images */
+.project-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--dark-blue-lighter) 0%, var(--dark-blue-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+.project-image::after {
+    content: '🖼️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.project-image img {
+    position: relative;
+    z-index: 1;
+}
+
+/* Error handling for broken images */
+.project-image img[src=""],
+.project-image img:not([src]) {
+    display: none;
 }
 
 /* Contact Section */
@@ -307,13 +480,17 @@ h2 {
     section {
         padding: 3rem 1rem;
     }
+
+    .profile-image {
+        margin: 0 auto 2rem;
+    }
 }
 
 /* Dark Blue Sections */
 .dark-blue-section,
 .projects,
 .contact {
-    background-color: var(--dark-blue);
+    background-color: rgba(10, 25, 47, 0.3);
     color: var(--text-light);
     padding: 6rem 2rem;
     position: relative;
@@ -520,4 +697,73 @@ textarea {
 .skill-tags span:hover {
     transform: translateY(-3px);
     box-shadow: var(--glow-shadow);
+}
+
+/* プロフィール画像用のスタイル */
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 2px solid var(--accent-blue);
+    box-shadow: var(--card-shadow);
+    background: transparent;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* About セクション用の画像スタイル */
+.about-image {
+    width: 100%;
+    max-width: 250px;
+    height: 250px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-lg);
+}
+
+/* 一般的な画像の角丸スタイル */
+img {
+    border-radius: var(--border-radius-sm);
+}
+
+/* 特定の画像コンテナの角丸 */
+.image-container {
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.image-container img {
+    border-radius: var(--border-radius-md);
+}
+
+/* Skills section styling */
+.skills {
+    color: var(--text-light);
+}
+
+.skills h3 {
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+}
+
+/* Twitter to X icon conversion */
+.fab.fa-twitter:before,
+.fa-twitter:before {
+    content: '𝕏' !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    font-weight: bold !important;
+    font-style: normal !important;
 }

@@ -40,6 +40,60 @@ npx http-server
 
 サーバーを停止するには、ターミナルで`Ctrl + C`を押します。
 
+## 画像の使用方法
+
+### 画像ファイルの配置
+1. プロジェクトルートに`images`フォルダを作成
+2. 画像ファイルを`images`フォルダに配置
+3. 推奨ファイル形式：`.jpg`, `.png`, `.webp`
+
+### 画像の種類と用途
+
+#### プロジェクト画像
+- ファイル名例：`fitness-app.jpg`, `todo-app.jpg`
+- 推奨サイズ：600×400px以上
+- 用途：プロジェクトカードの表示画像
+
+#### プロフィール画像
+- ファイル名：`profile.jpg`
+- 推奨サイズ：300×300px以上（正方形）
+- 用途：Aboutセクションのプロフィール写真
+
+#### 背景画像（オプション）
+- ファイル名例：`hero-bg.jpg`
+- 推奨サイズ：1920×1080px以上
+- 用途：ヒーローセクションの背景
+
+### HTMLでの画像表示
+```html
+<!-- プロジェクト画像 -->
+<div class="project-image">
+    <img src="images/project-name.jpg" alt="プロジェクト説明" />
+</div>
+
+<!-- プロフィール画像 -->
+<div class="profile-image">
+    <img src="images/profile.jpg" alt="プロフィール写真" />
+</div>
+```
+
+### CSSでの背景画像
+```css
+.hero {
+    background-image: url('images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+```
+
+### 画像最適化のヒント
+1. ファイルサイズを抑える（500KB以下推奨）
+2. WebP形式を使用すると軽量化可能
+3. レスポンシブ対応のため複数サイズを用意
+
+### 画像がない場合
+画像ファイルが見つからない場合は、プレースホルダー（🖼️）が表示されます。
+
 ## 機能
 
 - レスポンシブデザイン
