@@ -168,7 +168,7 @@ npx http-server
 git init
 
 # リモートリポジトリを追加
-git remote add origin https://github.com/あなたのユーザー名/あなたのユーザー名.github.io.git
+git remote add origin https://github.com/boywithdv/home.github.io.git
 
 # mainブランチを作成
 git branch -M main
@@ -191,7 +191,7 @@ git push -u origin main
 2. 「Settings」タブをクリック
 3. 左サイドバーの「Pages」をクリック
 4. 「GitHub Pages」セクションで、サイトが公開されていることを確認
-   - `https://あなたのユーザー名.github.io` でアクセス可能
+   - `https://boywithdv.github.io/home.github.io` でアクセス可能
    - デプロイには数分かかる場合があります
 
 ### 5. 更新方法
